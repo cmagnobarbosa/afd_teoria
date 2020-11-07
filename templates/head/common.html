@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+{% block head %}
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1,
+  maximum-scale=1.0"/>
+  <title>AFD - TP - Teoria de Linguagens</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/static/css/materialize.min.css"
+    media="screen,projection"/>
+
+    <!--Import style.css-->
+     <link type="text/css" rel="stylesheet" href="/static/css/style.css"
+     media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!--JavaScript-->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="/static/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/static/js/init.js"></script>
+
+    {% endblock %}
+  </head>
+
+  <body>
+  <nav class="grey darken-2" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="/"
+        class="brand-logo">AFD-TP</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/">Home</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="sidenav">
+        <li><a href="/">Home</a></li>
+      </ul>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger">
+          <i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+    {% block content %}{% endblock %}
+    <footer class="page-footer grey darken-2">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">TP1 - Teoria de Linguagens</h5>
+            <p class="grey-text text-lighten-4">Desenvolvido por Carlos Magno.
+                Simula um AFD.</p>
+          </div>
+          <div class="col l3 s12">
+            <h5 class="white-text">Github</h5>
+            <ul>
+              <li><a class="white-text" href="https://github.com/cmagnobarbosa"
+                  target='_blank'>@cmagnobarbosa</a></li>
+            </ul>
+          </div>
+          <div class="col l3 s12">
+            <h5 class="white-text">Contact</h5>
+            <ul>
+              <li><a class="white-text" href="#!">cmagnobarbosa</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="orange-text text-lighten-3"
+      href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+
+
+  </body>
+</html>

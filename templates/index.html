@@ -1,0 +1,133 @@
+{% extends "head/common.html" %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center red-text">AFD</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">AFD@Checker</h5>
+        <p>Insira uma palavra ou realize o upload de um arquivo,
+            com as palavras para serem verificadas.</p>
+      </div>
+      <div class="row center">
+          <div class='col s10'>
+              <form action='/check_word', method='POST'>
+               <div class="row">
+                 <div class="input-field col s12">
+                   <input placeholder="Por Favor, insira a palavra
+                   a ser verificada."
+                   id="word" name='word' type="text" class="validate">
+                   <label for="word">Palavra</label>
+                 </div>
+               </div>
+               <button class="btn waves-effect waves-light" type="submit"
+               name="action">
+                Check Word<i class="material-icons right">send</i>
+               </button>
+              </form>
+          </div>
+          <div class='col s2'>
+              <a class="waves-effect waves-light btn modal-trigger"
+              href="#modal_upload">Upload a File</a>
+          </div>
+      </div>
+      {% if status%}
+        <div class="row center">
+          <h5 class="col s12 light">Word Checked: {{status}}</h5>
+            <ul class="collapsible">
+             <li>
+               <div class="collapsible-header">
+                   <i class="material-icons">visibility</i>
+                   Show Transitions Step by step
+               </div>
+               <div class="collapsible-body">
+                   <div class='row center'>
+                       <table class='centered'>
+                           <thead>
+                               <tr>
+                                   <th>Element</th>
+                                   <th>Transition</th>
+                               </tr>
+                           </thead>
+                           <tbody>
+                           {% for row in  log%}
+                               <tr>
+                                 <td>{{ row['word']|tojson|safe }}</td>
+                                 <td>{{ row['transition'] }}</td>
+                               </tr>
+                           {% endfor %}
+                           <tbody>
+                       </table>
+                   </div>
+               </div>
+             </li>
+           </ul>
+       </div>
+
+      {% endif %}
+      <!-- Modal Trigger -->
+        <a class="waves-effect waves-light btn modal-trigger" href="#modal1">
+            Ver Automato utilizado</a>
+
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal">
+          <div class="modal-content">
+            <h4>Automato Plot</h4>
+            <p>AFD carregado.</p>
+            <embed src="static/imgs/afd_plot.pdf" width="700" height="600">
+          </div>
+          <br>
+          <br>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">
+                Close</a>
+          </div>
+        </div>
+
+        <!-- upload a file -->
+        <!-- Modal Structure -->
+        <div id="modal_upload" class="modal">
+          <div class="modal-content">
+            <h4>Verificar Varias Palavras</h4>
+            <div class='col s12'>
+              <form action="/upload" method="post" enctype=multipart/form-data>
+                  <div class="file-field input-field">
+                    <div class="btn">
+                      <span>File</span>
+                      <input type="file" name=file>
+                    </div>
+                    <div class="file-path-wrapper">
+                      <input class="file-path validate" type="text"
+                      placeholder="Upload one file">
+                    </div>
+                  </div>
+                  <button class="btn waves-effect waves-light"
+                  value=Upload type="submit" name="action">
+                   Upload<i class="material-icons right">send</i>
+                  </button>
+              </form>
+          </div>
+          </div>
+          <br>
+          <br>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">
+                Cancelar</a>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+  <br><br>
+</div>
+    <script >
+    $(document).ready(function(){
+        M.AutoInit();
+    });
+    </script>
+
+{% endblock %}
