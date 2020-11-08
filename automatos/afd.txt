@@ -3,13 +3,7 @@ final:q5
 q0 C q1
 q1 1 q2
 q2 0 q3
-q2 A q4
 q2 3 q5
-q3 9 q6
-q4 L q7
-q6 3 q5
-q6 A q4
-q6 0 q3
-q7 3 q5
-q7 0 q3
-q7 A q4
+q2 A q4
+q3 9 q2
+q4 L q2

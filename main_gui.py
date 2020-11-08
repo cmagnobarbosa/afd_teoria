@@ -7,7 +7,7 @@ from werkzeug.utils import secure_filename
 from main import load_data, process_word
 from utils import format_output
 
-# import webbrowser
+import webbrowser
 
 app = Flask(__name__)
 
@@ -62,6 +62,8 @@ def upload_file():
 
 # main method
 if __name__ == "__main__":
-    # webbrowser.open_new('http://localhost:5000/')
+    print("Carregando interface, O navegador irá abrir automaticamente.")
+    print("Caso não abra acesse http://localhost:5000/")
+    webbrowser.open_new('http://localhost:5000/')
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host='0.0.0.0', port=port)
