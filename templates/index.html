@@ -31,7 +31,7 @@
           </div>
           <div class='col s2'>
               <a class="waves-effect waves-light btn modal-trigger"
-              href="#modal_upload">Upload a File</a>
+              href="#modal_upload">Upload file</a>
           </div>
       </div>
       {% if status%}
@@ -70,12 +70,12 @@
       {% endif %}
       <!-- Modal Trigger -->
         <a class="waves-effect waves-light btn modal-trigger" href="#modal1">
-            Ver Automato utilizado</a>
+            See automaton</a>
 
         <!-- Modal Structure -->
         <div id="modal1" class="modal">
           <div class="modal-content">
-            <h4>Automato Plot</h4>
+            <h4>Automaton Plot</h4>
             <p>AFD carregado.</p>
             <embed src="static/imgs/afd_plot.pdf" width="700" height="600">
           </div>
@@ -91,7 +91,8 @@
         <!-- Modal Structure -->
         <div id="modal_upload" class="modal">
           <div class="modal-content">
-            <h4>Verificar Varias Palavras</h4>
+            <h4>Check multiple words read from file</h4>
+            <p>Envie um arquivo com uma palavra por linha</p>
             <div class='col s12'>
               <form action="/upload" method="post" enctype=multipart/form-data>
                   <div class="file-field input-field">
@@ -115,7 +116,7 @@
           <br>
           <div class="modal-footer">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">
-                Cancelar</a>
+                Cancel</a>
           </div>
         </div>
     </div>

@@ -1,8 +1,14 @@
 """Módulo Principal TP teoria de Linguagens."""
 from graphviz import Digraph
+from utils import load_data
 
-# Load AFD from file
+# Load DFA from file
 AFD = "automatos/afd.txt"
+
+# Utilizado para plot do AFD gerado.
+# Used to plot DFA
+# Used only to plot
+# O graphiz somente é Utilizado para o plot
 dot = Digraph(comment='AFD Loaded')
 
 
@@ -11,13 +17,6 @@ def generate_states(transition):
     # origin, consumed, destiny
     return [field.strip() for field in transition.split(" ")]
 
-
-def load_data(word_path):
-    """Read data from file."""
-    with open(word_path, "r") as lines:
-        return [line.strip() for line in lines]
-
-
 def process_state(term, valid_transitions):
     """Process a state and return next state."""
     try:
@@ -25,42 +24,63 @@ def process_state(term, valid_transitions):
     except KeyError as error:
         raise KeyError(f"Indefinition , Invalid Transition: {error}.")
 
+def generate_DFA():
+    """
+    Generate DFA(Deterministic finite automaton).
+    Gera o AFD(Autômato finito Deterministico).
+    """
+    # Load data to generate DFA
+    data = load_data(AFD)
+    initial_state = data.pop(0).split(":")[1]
+    final_state = data.pop(0).split(":")[1]
 
-# Load AFD data from file
-data = load_data(AFD)
-initial_state = data.pop(0).split(":")[1]
-final_state = data.pop(0).split(":")[1]
+    # Generate transition states
+    states = {}
+    print(f'Initial state: {initial_state}')
+    print(f"Final state: {final_state}")
 
-# Generate transition states
-states = {}
-print(f'Initial state: {initial_state}')
-print(f"Final state: {final_state}")
+    # Add initial and final state to plot
+    dot.node(initial_state, color="black", style='bold')
+    dot.node(final_state, color="green", shape='doublecircle', style="bold")
 
-dot.node(initial_state, color="black", style='bold')
-dot.node(final_state, color="green", shape='doublecircle', style="bold")
-for t in data:
-    src, consumed, destiny = generate_states(t)
-    dot.node(src)
-    dot.node(destiny)
-    dot.edge(src, destiny, consumed)
-    if src not in states:
-        accepted = {}
-        accepted[consumed] = destiny
-        states[src] = accepted
-    else:
-        temp = states[src]
-        temp[consumed] = destiny
-        states[src] = temp
+    # DFA, AFD
+    # Generate a dictionary with valid transitions
+    # {'estado': {'termo_aceito': 'proximo_estado'}}
+    for t in data:
+        # src: source state
+        # consumed: accepted word
+        # destiny: next state
+        src, consumed, destiny = generate_states(t)
 
-print(f"States: {states}")
-dot.render('static/imgs/afd_plot', view=True)
+        # used in plot
+        dot.node(src)
+        dot.node(destiny)
+        dot.edge(src, destiny, consumed)
+
+        if src not in states:
+            accepted = {}
+            accepted[consumed] = destiny
+            states[src] = accepted
+        else:
+            temp = states[src]
+            temp[consumed] = destiny
+            states[src] = temp
+
+    print('AFD carregado')
+    print(f"DFA States: {states}")
+
+    # Exibe o autômato gerado
+    # plot DFA
+    dot.render('static/imgs/afd_plot', view=True)
+    return states, initial_state, final_state
 
 
-def process_word(word, detail_steps=True):
-    """Process a word."""
+def check_word(word, states, initial_state, final_state):
+    """Check if a word is accepted by DFA."""
+    detail_steps=True
     transitions_log = []
     response_state = ''
-    # words = load_data(words_file)
+
     print(f"Word Loaded: {word}")
     # Process word of input
     word_vector = list(word)
@@ -82,6 +102,8 @@ def process_word(word, detail_steps=True):
     for element in word_vector:
         try:
             old_state = actual_state
+            # verifica se a letra possui uma transição valida,
+            # se sim retorna o próximo estado
             actual_state = process_state(element, states[actual_state])
 
             # Exibe cada transição realizada
@@ -101,5 +123,5 @@ def process_word(word, detail_steps=True):
         print("\n------------------------\n")
     else:
         print("Word Not accepted, Fim da leitura Estado Não Final")
-        response_state = 'Word Not Accepted, Estado Não Final'
+        response_state = 'Word Not Accepted, Final state not reached'
     return response_state, transitions_log
