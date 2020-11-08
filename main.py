@@ -2,7 +2,7 @@
 from graphviz import Digraph
 
 # Load AFD from file
-AFD = "automatos/afd_jenaro.txt"
+AFD = "automatos/afd.txt"
 dot = Digraph(comment='AFD Loaded')
 
 
@@ -53,7 +53,7 @@ for t in data:
         states[src] = temp
 
 print(f"States: {states}")
-dot.render('static/imgs/afd_plot')
+dot.render('static/imgs/afd_plot', view=True)
 
 
 def process_word(word, detail_steps=True):
