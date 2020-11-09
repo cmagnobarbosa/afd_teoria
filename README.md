@@ -15,6 +15,8 @@ Execute os comandos que aparecem após `$`.
 Esta implementação é genérica suportando a modificação do arquivo com as
 transições em `automatos/afd.txt`.
 
+O processo de instalação também esta disponível no youtube:
+ https://youtu.be/6yIw3a9JEPc
 ## AFD padrao carregado
 
 O AFD padrão carregado foi gerado a partir
